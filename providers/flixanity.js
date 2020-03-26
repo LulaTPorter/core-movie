@@ -38,10 +38,12 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 			"nopop": "",
 			"idEl": idFilm
 		}
-		libs.request_post(apiEmbed, {}, bodyEmbed).then(function(response) {
+		libs.request_post(apiEmbed, {
+			"Content-Type": "application/json"
+		}, bodyEmbed).then(function(response) {
 
 			console.log("--------- resultEmbed flixanity---------", links)
-			
+
 			var links = JSON.parse(response);
 
 			for (var itemLink in links) {
