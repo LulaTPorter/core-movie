@@ -83,3 +83,15 @@ libs.string_convertToSearchQueryString = function() {
     title = titles_temp.join(replaceChar);
     return title;
 }
+
+libs.string_isEmbed = function(url) {
+    let embeds = ["openload", "vidcloud9", "vidnode", "supervideo", "fembed", "vidsrc", "vidnode"]
+
+    for (const item in embeds) {
+        if (url.indexOf(item) != -1) {
+            return true;
+        }
+    }
+    return false;
+}
+

@@ -27,8 +27,14 @@ libs.request_parseHeaderBody = function (headers, body) {
 libs.request_getHTML = function (url, headers) {
 	return new Promise(function(relsove, reject) {
 		fetch(url, {headers}).then(function(response) {
-			relsove(response.text())
-			return
+
+			response.text().then(function(res) {
+				relsove(res)
+				return
+			}).catch(function(e) {
+				reject(e)
+				return
+			})
 		}).catch(function(error) {
 			reject(error)
 			return
@@ -40,8 +46,14 @@ libs.request_getHTML = function (url, headers) {
 libs.request_getJSON = function (url, headers) {
 	return new Promise(function(relsove, reject) {
 		fetch(url, {headers}).then(function(response) {
-			relsove(response.json())
-			return
+
+			response.json().then(function(res) {
+				relsove(res)
+				return
+			}).catch(function(e) {
+				reject(e)
+				return
+			})
 		}).catch(function(error) {
 			reject(error)
 			return
@@ -54,13 +66,13 @@ libs.request_getJSON = function (url, headers) {
 libs.request_get = function (url, headers) {
 	return new Promise(function(relsove, reject) {
 		fetch(url, {headers}).then(function(response) {
-			try {
-				relsove(JSON.parse(response.text()))
+			response.text().then(function(res) {
+				relsove(res)
 				return
-			} catch(e) {
+			}).catch(function(e) {
 				reject(e)
 				return
-			}
+			})
 			
 		}).catch(function(error) {
 			reject(error)
@@ -92,13 +104,13 @@ libs.request_post = function(url, headers={}, body) {
             "headers": parsed.headers,
             "body": parsed.body
 		}).then(function(response) {
-			try {
-				relsove(JSON.parse(response.text()))
+			response.text().then(function(res) {
+				relsove(res)
 				return
-			} catch(e) {
+			}).catch(function(e) {
 				reject(e)
 				return
-			}	
+			})
 		}).catch(function(error) {
 			reject(error)
 			return

@@ -1,5 +1,5 @@
 {
 	"providers": [
-		"providers/afdah.js"
+		"providers/flixanity.js"
 	]
 }
