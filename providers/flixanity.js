@@ -39,10 +39,15 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 			"idEl": idFilm
 		}
 		libs.request_post(apiEmbed, {
-			"Content-Type": "application/json"
+			"Content-Type": "application/x-www-form-urlencoded",
+			"accept": "application/json, text/javascript, */*; q=0.01",
+			"sec-fetch-dest": "empty",
+			"x-requested-with": "XMLHttpRequest",
+			"authorization": "Bearer false",
+			"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
 		}, bodyEmbed).then(function(response) {
 
-			console.log("--------- resultEmbed flixanity---------", links)
+			console.log("--------- resultEmbed flixanity---------", links, bodyEmbed)
 
 			var links = JSON.parse(response);
 
