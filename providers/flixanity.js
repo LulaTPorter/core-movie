@@ -13,7 +13,18 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 
 	console.log("--------- info flixanity---------", {url, apiSearch, bodySearch})
 
-	libs.request_post(apiSearch, {}, bodySearch).then(function(response) {
+	libs.request_post(apiSearch, {
+		"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:76.0) Gecko/20100101 Firefox/76.0",
+		"Accept": "application/json, text/javascript, */*; q=0.01",
+		"Accept-Language": "vi-VN,vi;q=0.8,en-US;q=0.5,en;q=0.3",
+		"Content-Type": "application/x-www-form-urlencoded",
+		"Origin": url,
+		"Connection": "keep-alive",
+		"Referer": "https://flixanity.app/",
+		"Sec-Fetch-Dest": "empty",
+		"Sec-Fetch-Mode": "cors",
+		"Sec-Fetch-Site": "same-site"
+	}, bodySearch).then(function(response) {
 		
 
 		console.log("--------- resultSearch flixanity---------", resultSearch);
@@ -63,12 +74,24 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 
 				console.log("--------- embed flixanity---------", embed)
 				if (embed.length > 1) {
-					callback({
-						"name": "test",
+					embed = embed[1]
+
+					var resource = {
+						"provider": "test",
+						"host": "",
 						"file": embed[1],
 						"size": "",
-						"url": "",
-						"name": "",
+						"type": "",
+						"label": ""
+					} 
+
+
+					callback({
+						"provider": "test",
+						"host": "",
+						"file": embed[1],
+						"size": "",
+						"type": "",
 						"label": ""
 					})
 				}
