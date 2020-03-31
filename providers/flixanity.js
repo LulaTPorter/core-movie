@@ -95,7 +95,7 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 						console.log("------------- contentType Flixianity --------------", hostName, contentType);
 
 						if (contentType) {
-							if (contentType.indexOf("html") != -1 && contentType.indexOf("plain") != -1) {
+							if (contentType.indexOf("html") != -1 || contentType.indexOf("plain") != -1) {
 
 								if (hosts[hostName]) {
 									resource["host"] = hostName;
