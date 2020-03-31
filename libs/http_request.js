@@ -87,7 +87,7 @@ libs.request_getHeader = function (url, method, headers) {
 			headers: headers,
 			method: method
 		}).then(function(response) {
-			relsove(response._headers)
+			relsove(response.headers.map)
 			return
 		}).catch(function(error) {
 			reject(error)
