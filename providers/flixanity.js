@@ -72,9 +72,11 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 
 				embed = embed.match(/src *\=\\* *\"([^"]+)/i);
 
-				console.log("--------- embed flixanity---------", embed)
+				
 				if (embed.length > 1) {
 					embed = embed[1]
+
+					console.log("--------- embed flixanity---------", embed)
 
 					var resource = {
 						"provider": "flixanity",
@@ -87,7 +89,7 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 
 					libs.request_getHeader(embed, 'HEAD', {}).then(function(res) {
 
-						console.log("------------- header Flixianity --------------", res);
+						console.log("------------- header Flixianity --------------", embed, res);
 
 						var hostName = libs.string_getHost(embed);
 						var contentType = res["Content-Type"] || res["content-type"];
