@@ -77,23 +77,48 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 					embed = embed[1]
 
 					var resource = {
-						"provider": "test",
+						"provider": "flixanity",
 						"host": "",
-						"file": embed[1],
+						"file": embed,
 						"size": "",
 						"type": "",
 						"label": ""
 					} 
 
+					libs.request_getHeader(embed, 'HEAD', {}).then(function(res) {
 
-					callback({
-						"provider": "test",
-						"host": "",
-						"file": embed[1],
-						"size": "",
-						"type": "",
-						"label": ""
+						console.log("------------- header Flixianity --------------", res);
+
+						var hostName = libs.string_getHost(embed);
+						var contentType = res["Content-Type"] || res["content-type"];
+
+						console.log("------------- contentType Flixianity --------------", hostName, contentType);
+
+						if (contentType) {
+							if (contentType.indexOf("html") != -1 || contentType.indexOf("plain") != -1) {
+
+								if (hosts[hostName]) {
+									resource["host"] = hostName;
+									hosts[hostName](resource, config, extraInfo, callback);
+								}
+							} else {
+								var fileSize = res.fileSize || 0;
+
+								console.log("------------- direct fileSize Flixianity --------------", fileSize);
+								callback({
+									"provider": "flixanity",
+									"host": hostName,
+									"file": embed,
+									"size": fileSize,
+									"type": "direct",
+									"label": "HD"
+								})	
+							}
+						}
+					}).catch(function(e) {
+						console.log("------ flixanity ----------", e)
 					})
+
 				}
 			}
 		})

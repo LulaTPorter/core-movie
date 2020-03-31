@@ -84,7 +84,17 @@ libs.string_convertToSearchQueryString = function() {
     return title;
 }
 
-libs.string_isEmbed = function(url) {
+libs.string_getHost = function(url) {
+   var hostName = url.match(/^:?\/\/|https?:\/\/([^/]*@)?(.+?)(:\d{2,5})?([/?].*)?$/);
+   if (hostName.length == 0) {
+       return "";
+   }
+
+   hostName = hostName[2].replace("www.");
+   return hostName.replace(/\.[A-z]+$/, "");
+}
+
+libs.string_isSupportEmbed = function(url) {
     let embeds = ["openload", "vidcloud9", "vidnode", "supervideo", "fembed", "vidsrc", "vidnode"]
 
     for (const item in embeds) {

@@ -81,9 +81,12 @@ libs.request_get = function (url, headers) {
 	});
 }
 
-libs.request_getHeader = function (url, headers) {
+libs.request_getHeader = function (url, method, headers) {
 	return new Promise(function(relsove, reject) {
-		fetch(url, {headers}).then(function(response) {
+		fetch(url, {
+			headers: headers,
+			method: method
+		}).then(function(response) {
 			relsove(response._headers)
 			return
 		}).catch(function(error) {
@@ -93,6 +96,26 @@ libs.request_getHeader = function (url, headers) {
 	});
 }
 
+libs.request_getFileSize = function(url, headers) {
+	return new Promise(function(relsove, reject) {
+		fetch(url, {
+			headers: headers,
+			method: "HEAD"
+		}).then(function(response) {
+			var headerResponse = response._headers
+			var contentLength = headerResponse["Content-Length"] || headerResponse["content-length"]
+			if (!contentLength) {
+				reject(false)
+				return
+			}
+			relsove(contentLength)
+			return
+		}).catch(function(error) {
+			reject(error)
+			return
+		})
+	});
+}
 
 
 libs.request_post = function(url, headers={}, body) {
