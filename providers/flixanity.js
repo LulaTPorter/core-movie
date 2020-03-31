@@ -14,9 +14,11 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 	console.log("--------- info flixanity---------", {url, apiSearch, bodySearch})
 
 	libs.request_post(apiSearch, {}, bodySearch).then(function(response) {
-		var resultSearch = JSON.parse(response);
+		
 
-		console.log("--------- resultSearch flixanity---------", resultSearch)
+		console.log("--------- resultSearch flixanity---------", resultSearch);
+
+		var resultSearch = JSON.parse(response);
 
 		var urlSearch = false;
 		var idFilm = false;
@@ -76,4 +78,4 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 	}).catch(function(e) {
 		console.log(e)
 	})
-}	
+}
