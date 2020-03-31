@@ -102,7 +102,7 @@ libs.request_getFileSize = function(url, headers) {
 			headers: headers,
 			method: "HEAD"
 		}).then(function(response) {
-			var headerResponse = response._headers
+			var headerResponse = response.headers.map
 			var contentLength = headerResponse["Content-Length"] || headerResponse["content-length"]
 			if (!contentLength) {
 				reject(false)
