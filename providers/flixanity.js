@@ -60,7 +60,7 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 			"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
 		}, bodyEmbed).then(function(response) {
 
-			console.log("--------- resultEmbed flixanity---------", links, bodyEmbed)
+			console.log("--------- resultEmbed flixanity---------", response, bodyEmbed)
 
 			var links = JSON.parse(response);
 
@@ -123,7 +123,7 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 							}
 						}
 					}).catch(function(e) {
-						console.log("------ flixanity ----------", e)
+						console.log("------ error_flixanity ----------", e)
 					})
 
 				}
