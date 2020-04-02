@@ -47,7 +47,7 @@ libs.request_getHTML = function (url, headers) {
 }
 
 
-libs.request_getJSON = function (url, headers) {
+libs.request_getJSON = function (url, headers, extraInfo={}) {
 	return new Promise(function(relsove, reject) {
 		fetch(url, {headers}).then(function(response) {
 
@@ -55,7 +55,8 @@ libs.request_getJSON = function (url, headers) {
 				relsove({
 					"url": url,
 					"headers": headers,
-					"data": res
+					"data": res,
+					"extraInfo": extraInfo
 				})
 				return
 			}).catch(function(e) {
@@ -93,7 +94,7 @@ libs.request_get = function (url, headers) {
 	});
 }
 
-libs.request_getHeader = function (url, method, headers) {
+libs.request_getHeader = function (url, method, headers, extraInfo={}) {
 	return new Promise(function(relsove, reject) {
 		fetch(url, {
 			headers: headers,
@@ -103,7 +104,8 @@ libs.request_getHeader = function (url, method, headers) {
 			{
 				"data": response.headers.map,
 				"url": url,
-				"method": method
+				"method": method,
+				"extraInfo": extraInfo
 			}
 			)
 			return
