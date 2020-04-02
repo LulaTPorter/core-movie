@@ -29,7 +29,7 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 
 		console.log("--------- resultSearch flixanity---------", resultSearch);
 
-		var resultSearch = JSON.parse(response);
+		var resultSearch = JSON.parse(response.data);
 
 		var urlSearch = false;
 		var idFilm = false;
@@ -60,9 +60,9 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 			"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
 		}, bodyEmbed).then(function(response) {
 
-			console.log("--------- resultEmbed flixanity---------", response, bodyEmbed)
 
-			var links = JSON.parse(response);
+			var links = JSON.parse(response.data);
+
 
 			for (var itemLink in links) {
 
@@ -81,7 +81,7 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 				if (embed.length > 1) {
 					embed = embed[1]
 
-					console.log("--------- embed flixanity---------", embed)
+					console.log("--------- embed flixanity---------", embed);
 
 					var resource = {
 						"provider": "flixanity",
@@ -94,12 +94,12 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 
 					libs.request_getHeader(embed, 'HEAD', {}).then(function(res) {
 
-						console.log("------------- header Flixianity --------------", embed, res);
+						console.log("------------- header Flixianity --------------", res.url, res);
 
-						var hostName = libs.string_getHost(embed);
-						var contentType = res["Content-Type"] || res["content-type"];
+						var hostName = libs.string_getHost(res.url);
+						var contentType = res.data["Content-Type"] || res.data["content-type"];
 
-						console.log("------------- contentType Flixianity --------------", embed,  hostName, contentType);
+						console.log("------------- contentType Flixianity --------------", res.url,  hostName, contentType);
 
 						if (contentType) {
 							if (contentType.indexOf("html") != -1 || contentType.indexOf("plain") != -1) {
@@ -109,13 +109,13 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 									hosts[hostName](resource, config, extraInfo, callback);
 								}
 							} else {
-								var fileSize = res["content-length"] || 0;
+								var fileSize = res.data["content-length"] || 0;
 
 								console.log("------------- direct fileSize Flixianity --------------", fileSize);
 								callback({
 									"provider": "flixanity",
 									"host": hostName,
-									"file": embed,
+									"file": res.url,
 									"size": fileSize,
 									"type": "direct",
 									"label": "HD"
@@ -128,6 +128,8 @@ source.getResource = function(movieInfo, hosts, libs, config, callback) {
 
 				}
 			}
+
+
 		})
 
 	}).catch(function(e) {

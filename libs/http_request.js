@@ -29,7 +29,11 @@ libs.request_getHTML = function (url, headers) {
 		fetch(url, {headers}).then(function(response) {
 
 			response.text().then(function(res) {
-				relsove(res)
+				relsove({
+					"data": res,
+					"url": url,
+					"headers": headers
+				})
 				return
 			}).catch(function(e) {
 				reject(e)
@@ -48,7 +52,11 @@ libs.request_getJSON = function (url, headers) {
 		fetch(url, {headers}).then(function(response) {
 
 			response.json().then(function(res) {
-				relsove(res)
+				relsove({
+					"url": url,
+					"headers": headers,
+					"data": res
+				})
 				return
 			}).catch(function(e) {
 				reject(e)
@@ -67,7 +75,11 @@ libs.request_get = function (url, headers) {
 	return new Promise(function(relsove, reject) {
 		fetch(url, {headers}).then(function(response) {
 			response.text().then(function(res) {
-				relsove(res)
+				relsove({
+					"url": url,
+					"headers": headers,
+					"data": res
+				})
 				return
 			}).catch(function(e) {
 				reject(e)
@@ -87,7 +99,13 @@ libs.request_getHeader = function (url, method, headers) {
 			headers: headers,
 			method: method
 		}).then(function(response) {
-			relsove(response.headers.map)
+			relsove(
+			{
+				"data": response.headers.map,
+				"url": url,
+				"method": method
+			}
+			)
 			return
 		}).catch(function(error) {
 			reject(error)
@@ -108,7 +126,11 @@ libs.request_getFileSize = function(url, headers) {
 				reject(false)
 				return
 			}
-			relsove(contentLength)
+			relsove({
+				"url": url,
+				"headers": headers,
+				"data": contentLength
+			})
 			return
 		}).catch(function(error) {
 			reject(error)
@@ -128,7 +150,12 @@ libs.request_post = function(url, headers={}, body) {
             "body": parsed.body
 		}).then(function(response) {
 			response.text().then(function(res) {
-				relsove(res)
+				relsove({
+					"url": url,
+					"headers": headers,
+					"body": body,
+					"data": res
+				})
 				return
 			}).catch(function(e) {
 				reject(e)
