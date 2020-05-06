@@ -1,5 +1,8 @@
 {
 	"providers": [
-		"providers/flixanity.js"
+		"providers/miradetodo.js",
+		"providers/flixanity.js",
+		"providers/m4ufree.js",
+		"providers/movieblueray.js"
 	]
 }

@@ -1,5 +1,14 @@
 {
 	"hosts": [
-		"hosts/vidcloud9.js"
+		"hosts/vidcloud9.js",
+		"hosts/vidnode.js",
+		"hosts/fembed.js",
+		"hosts/videobin.js",
+		"hosts/clipwatching.js",
+		"hosts/fastplay.js",
+		"hosts/jawcloud.js",
+		"hosts/vidlox.js",
+		"hosts/vidoza.js",
+		"hosts/vup.js"
 	]
 }

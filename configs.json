@@ -1,5 +1,6 @@
 {
 	"configs": [
+		"libs/db.js",
 		"libs/http_request.js",
 		"libs/strings.js"
 	]

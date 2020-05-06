@@ -85,8 +85,8 @@ libs.string_convertToSearchQueryString = function() {
 }
 
 libs.string_getHost = function(url) {
-   var hostName = url.match(/^:?\/\/|https?:\/\/([^/]*@)?(.+?)(:\d{2,5})?([/?].*)?$/);
-   if (hostName.length == 0) {
+   var hostName = url.match(/^:?\/\/|https?:\/\/([^/]*@)?(.+?)(:\d{2,5})?([/?].*)?$/i);
+   if (!hostName || hostName.length == 0) {
        return "";
    }
 
